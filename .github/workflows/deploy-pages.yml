@@ -36,7 +36,7 @@ jobs:
           NEXT_OUTPUT: export
           # Set this to /<repo-name> if deploying to a project page (e.g. https://<user>.github.io/<repo-name>)
           # Leave empty for user/org pages (https://<user>.github.io) or custom domains
-          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: "/VisionForge"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -40,9 +40,15 @@ async def lifespan(app: FastAPI):
     model_path = os.path.join(os.path.dirname(__file__), "mnist_cnn_model.keras")
     
     print("[INFO] Loading CNN model...")
-    model = load_model(model_path)
-    feature_model = create_feature_extraction_model(model)
-    print("[OK] Model loaded successfully!")
+    try:
+        model = load_model(model_path)
+        feature_model = create_feature_extraction_model(model)
+        print("[OK] Model loaded successfully!")
+    except Exception as e:
+        print(f"[ERROR] Failed to load model: {e}")
+        # We don't raise here so the app can still start and return status
+        model = None
+        feature_model = None
     
     yield
     

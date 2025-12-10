@@ -75,8 +75,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://ka1lak.github.io",
-        "*"
+        "https://ka1lak.github.io"
     ],
     allow_credentials=True,
     allow_methods=["*"],

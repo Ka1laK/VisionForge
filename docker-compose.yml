@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      # Exclude venv/pycache to avoid conflicts if needed, though usually handled by dockerignore
+    restart: always
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # If backend is running on the same network, typically access via service name
+      # But since this is client-side rendering (mostly), localhost might be needed for browser access
+      # or a reverse proxy. For server-side calls:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: always
